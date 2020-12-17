@@ -1,0 +1,164 @@
+﻿<Page x:Class="TennisClub.UI.Pages.RolesPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      xmlns:local="clr-namespace:TennisClub.UI.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="900"
+      Title="RolesPage"
+      Loaded="Page_Loaded">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Button x:Name="ButtonRolesPage" Grid.Row="0" Click="ButtonRolesPage_Click" Cursor="Hand" Width="100" Height="35" Padding="5" Background="White" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,20,0">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="../Images/home.png" />
+                <TextBlock Margin="5,0" FontSize="16" FontWeight="Light">Home</TextBlock>
+            </StackPanel>
+        </Button>
+        <Button x:Name="refresh" Click="refresh_Click" Cursor="Hand" Height="35" Padding="5" Margin="0,10,130,0" Background="White" HorizontalAlignment="Right" VerticalAlignment="Top">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="../Images/reload.png" />
+                <TextBlock Margin="5,0" FontSize="16" FontWeight="Light">Herlaad pagina</TextBlock>
+            </StackPanel>
+        </Button>
+
+        <Border Grid.Row="1" BorderBrush="Black" BorderThickness="0,0,0,1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0" Content="Rol Beheren" FontSize="11" FontWeight="Bold" Margin="5" />
+                    <Label Grid.Row="1" Content="Rol naam: " HorizontalAlignment="Left" Margin="5" />
+                    <TextBox Grid.Row="1" x:Name="TextBoxRolNaam" Width="100" Height="20" Margin="30,0,0,0" />
+                    <Button x:Name="ButtonRolToevoegen" Grid.Row="2" Click="ButtonRolToevoegen_Click" Cursor="Hand" Height="28" Margin="5" Padding="5" Background="White" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="../Images/add.png" />
+                            <TextBlock Margin="5,0" FontSize="11" FontWeight="Light">Rol toevoegen</TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="ButtonRolAanpassen" Grid.Row="2" Click="ButtonRolAanpassen_Click" Cursor="Hand" Height="28" Margin="120,5,0,0" Padding="5" Background="White" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="../Images/updated.png" />
+                            <TextBlock Margin="5,0" FontSize="11" FontWeight="Light">Rol aanpassen</TextBlock>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Label Content="Reeds bestaande rollen" FontSize="11" FontWeight="Bold" Margin="5" />
+                    <DataGrid Grid.Row="1" x:Name="RolesList" Margin="10,5,10,5" HorizontalAlignment="Left" MouseDoubleClick="RollenList_MouseDoubleClick" HeadersVisibility="Column" IsReadOnly="True" />
+                    <TextBox x:Name="SelectedRole" Visibility="Collapsed" />
+                </Grid>
+            </Grid>
+        </Border>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" BorderBrush="Black" BorderThickness="0,0,1,0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0" BorderBrush="Black" BorderThickness="0,0,1,0"/>
+                    <Border Grid.Row="1" BorderBrush="Black" BorderThickness="0,0,1,0"/>
+                    <Border Grid.Row="2" BorderBrush="Black" BorderThickness="0,0,1,0"/>
+                    <Border Grid.Row="3" BorderBrush="Black" BorderThickness="0,0,1,0"/>
+                    <Border Grid.Row="4" BorderBrush="Black" BorderThickness="0,0,1,0"/>
+                    <Border Grid.Row="5" BorderBrush="Black" BorderThickness="0,0,1,0"/>
+                    <Border Grid.Row="6" BorderBrush="Black" BorderThickness="0,0,1,0"/>
+                    <Border Grid.Row="7" BorderBrush="Black" BorderThickness="0,0,1,0"/>
+                    <Border Grid.Row="8" BorderBrush="Black" BorderThickness="0,0,1,0"/>
+                    <Border Grid.Row="9" BorderBrush="Black" BorderThickness="0,0,1,0"/>
+
+                    <Label Grid.Row="0" Content="Lid-rol toevoegen" FontSize="11" FontWeight="Bold" />
+                    <Label Grid.Row="1" Content="Lid id: " HorizontalAlignment="Left"/>
+                    <TextBox Grid.Row="1" x:Name="TextBoxMemberId" Width="45" Height="20" HorizontalAlignment="Center" />
+                    <Label Grid.Row="2" Content="Rol id: " HorizontalAlignment="Left" />
+                    <TextBox Grid.Row="2" x:Name="TextBoxRoleId" Width="45" Height="20" HorizontalAlignment="Center" />
+                    <Label Grid.Row="3" Content="Start datum: " HorizontalAlignment="Left" />
+                    <DatePicker Grid.Row="4" Grid.Column="0" x:Name="DatePickerStartDate" Cursor="Hand" HorizontalAlignment="Left" Margin="5,0,0,0" SelectedDate="{x:Static sys:DateTime.Now}" Height="25" />
+                    <CheckBox Grid.Row="5" Content="Eind datum meegeven" FontSize="11" Margin="5,10,0,0" x:Name="CheckBoxEindButton" Click="CheckBoxEindButton_Click" IsChecked="False" HorizontalAlignment="Left" />
+                    <DatePicker Grid.Row="6" x:Name="DatePickerOnCreateEndDate" Margin="5,0,0,0" Cursor="Hand" Visibility="Collapsed" HorizontalAlignment="Left" SelectedDate="{x:Static sys:DateTime.Now}" Height="25" />
+                    <Button x:Name="ButtonMemberRolToevoegen" Grid.Row="7" Click="ButtonMemberRolToevoegen_Click" Cursor="Hand" Padding="5" Margin="2" Background="White" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="../Images/add.png" />
+                            <TextBlock Margin="5,0" FontSize="11" FontWeight="Light">Rol toekennen</TextBlock>
+                        </StackPanel>
+                    </Button>
+
+                    <Label Grid.Row="0" Grid.Column="1" Content="Lid-rol afnemen" FontSize="11" FontWeight="Bold" />
+                    <Label Grid.Row="1" Grid.Column="1" Content="Lid-rol id: " HorizontalAlignment="Left"  />
+                    <TextBox Grid.Row="1" Grid.Column="1" x:Name="TextBoxMemberIdToDelete" Width="45" Height="20" HorizontalAlignment="Center" />
+                    <Label Grid.Row="2" Grid.Column="1" Content="Afneem datum:" HorizontalAlignment="Left" />
+                    <DatePicker Grid.Row="3" Grid.Column="1" x:Name="DatePickerEndDate" Margin="5,0,0,0" Cursor="Hand" HorizontalAlignment="Left" SelectedDate="{x:Static sys:DateTime.Now}" Height="25" />
+                    <Button x:Name="ButtonMemberRolAfnemen" Grid.Row="7" Grid.Column="1" Click="ButtonMemberRolAfnemen_Click" Cursor="Hand" Padding="5" Margin="2" Background="White" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="../Images/removerole.png" />
+                            <TextBlock Margin="5,0" FontSize="11" FontWeight="Light">Rol afnemen</TextBlock>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+            </Border>
+            <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Label Content="Rollen van leden" FontSize="11" FontWeight="Bold" Margin="5" />
+                <DataGrid Grid.Row="1" x:Name="MemberRolesList" ColumnWidth="*" Margin="10,5,10,5" MouseDoubleClick="MemberRolesList_MouseDoubleClick" HeadersVisibility="Column" IsReadOnly="True" />
+            </Grid>
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Content="Zoek rol(len) van één lid" FontSize="11" FontWeight="Bold" Margin="5" />
+                <Label Content="Lid id: " Grid.Row="1" Margin="5,0,0,0" />
+                <TextBox x:Name="TextBoxSearchRolesMember" Grid.Row="1" HorizontalAlignment="Left" Width="50" Height="20" Margin="50,0,0,0"/>
+                <Button x:Name="ButtonSearchRolesMember" Grid.Row="1" Click="ButtonSearchRolesMember_Click" Cursor="Hand" Padding="5" Height="25" Margin="0,0,50,0" Background="White" HorizontalAlignment="Center">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="../Images/search.png" />
+                        <TextBlock Margin="5,0" FontSize="11" FontWeight="Light">Zoek</TextBlock>
+                    </StackPanel>
+                </Button>
+                <DataGrid Grid.Row="2" x:Name="RolesOfMemberList" ColumnWidth="*" Margin="10,5,10,5" HeadersVisibility="Column" IsReadOnly="True" />
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

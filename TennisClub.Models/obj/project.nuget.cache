@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "eNiGDRWJSGzrdc27RB8cejflVp74aRAjHQ9L5U0PX/y1qjZuia0nt0hdH2VIrd9DuErY5uN00m249o/ykZzLmw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Azdine\\Desktop\\TennisClub\\TennisClub.Models\\TennisClub.Models.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Azdine\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512"
+  ],
+  "logs": []
+}

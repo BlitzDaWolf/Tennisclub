@@ -1,0 +1,67 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29911.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backend", "Backend", "{75B4A75F-8FA3-42F4-AF4A-69B4FB4327DD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{FE8DF452-9EF1-4212-A905-CF9172366DC9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TennisClub.UI", "TennisClub.UI\TennisClub.UI.csproj", "{30D257F3-2C24-45FD-B0B6-8DAC79E3EED3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TennisClub.API", "TennisClub.API\TennisClub.API.csproj", "{F04FE116-95F3-404F-935B-BB13E3402560}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TennisClub.BAL", "TennisClub.BAL\TennisClub.BAL.csproj", "{9177AB7C-BA78-4228-BBB5-FFAD9A470339}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TennisClub.DAL", "TennisClub.DAL\TennisClub.DAL.csproj", "{47196D21-2F86-4BC0-ABFC-C769E6A90846}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TennisClub.DTO", "TennisClub.DTO\TennisClub.DTO.csproj", "{C03F020C-FF5B-4666-A90D-76733E381388}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TennisClub.Models", "TennisClub.Models\TennisClub.Models.csproj", "{B88DCD0C-87DA-4360-8BA7-394DA4A79D60}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{30D257F3-2C24-45FD-B0B6-8DAC79E3EED3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30D257F3-2C24-45FD-B0B6-8DAC79E3EED3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30D257F3-2C24-45FD-B0B6-8DAC79E3EED3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30D257F3-2C24-45FD-B0B6-8DAC79E3EED3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F04FE116-95F3-404F-935B-BB13E3402560}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F04FE116-95F3-404F-935B-BB13E3402560}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F04FE116-95F3-404F-935B-BB13E3402560}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F04FE116-95F3-404F-935B-BB13E3402560}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9177AB7C-BA78-4228-BBB5-FFAD9A470339}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9177AB7C-BA78-4228-BBB5-FFAD9A470339}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9177AB7C-BA78-4228-BBB5-FFAD9A470339}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9177AB7C-BA78-4228-BBB5-FFAD9A470339}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47196D21-2F86-4BC0-ABFC-C769E6A90846}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47196D21-2F86-4BC0-ABFC-C769E6A90846}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47196D21-2F86-4BC0-ABFC-C769E6A90846}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47196D21-2F86-4BC0-ABFC-C769E6A90846}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C03F020C-FF5B-4666-A90D-76733E381388}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C03F020C-FF5B-4666-A90D-76733E381388}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C03F020C-FF5B-4666-A90D-76733E381388}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C03F020C-FF5B-4666-A90D-76733E381388}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B88DCD0C-87DA-4360-8BA7-394DA4A79D60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B88DCD0C-87DA-4360-8BA7-394DA4A79D60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B88DCD0C-87DA-4360-8BA7-394DA4A79D60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B88DCD0C-87DA-4360-8BA7-394DA4A79D60}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{30D257F3-2C24-45FD-B0B6-8DAC79E3EED3} = {FE8DF452-9EF1-4212-A905-CF9172366DC9}
+		{F04FE116-95F3-404F-935B-BB13E3402560} = {75B4A75F-8FA3-42F4-AF4A-69B4FB4327DD}
+		{9177AB7C-BA78-4228-BBB5-FFAD9A470339} = {75B4A75F-8FA3-42F4-AF4A-69B4FB4327DD}
+		{47196D21-2F86-4BC0-ABFC-C769E6A90846} = {75B4A75F-8FA3-42F4-AF4A-69B4FB4327DD}
+		{C03F020C-FF5B-4666-A90D-76733E381388} = {75B4A75F-8FA3-42F4-AF4A-69B4FB4327DD}
+		{B88DCD0C-87DA-4360-8BA7-394DA4A79D60} = {75B4A75F-8FA3-42F4-AF4A-69B4FB4327DD}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7C54A823-393C-46A4-868A-107E35B47D79}
+	EndGlobalSection
+EndGlobal

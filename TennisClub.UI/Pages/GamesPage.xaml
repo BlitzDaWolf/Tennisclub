@@ -1,0 +1,33 @@
+﻿<Page x:Class="TennisClub.UI.Pages.GamesPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TennisClub.UI.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="GamesPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Button x:Name="ButtonRolesPage" Grid.Row="0" Click="ButtonRolesPage_Click" Cursor="Hand" Width="100" Height="35" Padding="5" Background="White" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,20,0">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="../Images/home.png" />
+                <TextBlock Margin="5,0" FontSize="16" FontWeight="Light">Home</TextBlock>
+            </StackPanel>
+        </Button>
+        <Button x:Name="refresh" Click="refresh_Click" Cursor="Hand" Height="35" Padding="5" Margin="0,10,130,0" Background="White" HorizontalAlignment="Right" VerticalAlignment="Top">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="../Images/reload.png" />
+                <TextBlock Margin="5,0" FontSize="16" FontWeight="Light">Herlaad pagina</TextBlock>
+            </StackPanel>
+        </Button>
+        <Grid Grid.Row="1">
+            
+        </Grid>
+    </Grid>
+</Page>

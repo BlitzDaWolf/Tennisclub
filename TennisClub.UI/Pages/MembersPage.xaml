@@ -1,0 +1,114 @@
+﻿<Page x:Class="TennisClub.MembersPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      xmlns:local="clr-namespace:TennisClub"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Loaded="Page_Loaded"
+      Title="MemberListPage">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Grid.Column="1">
+            <Button x:Name="ButtonRolesPage" Click="ButtonRolesPage_Click" Cursor="Hand" Height="35" Padding="5" Margin="10" Background="White" HorizontalAlignment="Right" VerticalAlignment="Top">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../Images/home.png" />
+                    <TextBlock Margin="5,0" FontSize="16" FontWeight="Light">Home</TextBlock>
+                </StackPanel>
+            </Button>
+            <Button x:Name="refresh" Click="refresh_Click" Cursor="Hand" Height="35" Padding="5" Margin="0,10,110,0" Background="White" HorizontalAlignment="Right" VerticalAlignment="Top">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../Images/reload.png" />
+                    <TextBlock Margin="5,0" FontSize="16" FontWeight="Light">Herlaad pagina</TextBlock>
+                </StackPanel>
+            </Button>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="0">
+                <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Content="Lid toevoegen/updaten" FontSize="11" FontWeight="Bold" Margin="2" />
+            <Label Grid.Row="1" HorizontalAlignment="Left" Content="Federatienr.:* " x:Name="LabelFederatieNr" Margin="2" />
+            <TextBox HorizontalAlignment="Right" Grid.Row="1" Width="100" Height="25" x:Name="TextBoxFederatieNr" Margin="2" />
+            <Label Grid.Row="2" HorizontalAlignment="Left" Content="Voornaam:* " x:Name="LabelVoornaam" Margin="2" />
+            <TextBox HorizontalAlignment="Right" Grid.Row="2" Width="100" Height="25" x:Name="TextBoxVoornaam" Margin="2" />
+            <Label Grid.Row="3" HorizontalAlignment="Left" Content="Achternaam:* " x:Name="LabelAchternaam" Margin="2" />
+            <TextBox HorizontalAlignment="Right" Grid.Row="3" Width="100" Height="25" x:Name="TextBoxAchternaam" Margin="2" />
+            <Label Grid.Row="4" HorizontalAlignment="Left" Content="Geslacht:* " x:Name="LabelGeslacht" Margin="2" />
+            <ComboBox HorizontalAlignment="Right" Grid.Row="4" Width="100" Height="25" x:Name="ComboBoxGeslacht" SelectedIndex="0" Margin="2" >
+                <ComboBoxItem Content="Man" />
+                <ComboBoxItem Content="Vrouw" />
+            </ComboBox>
+            <Label Grid.Row="5" HorizontalAlignment="Left" Content="Geboortedatum:* " x:Name="LabelGeboortedatum" Margin="2" />
+            <DatePicker HorizontalAlignment="Right" Grid.Row="5" Width="100" Height="25" Cursor="Hand" x:Name="DatePickerGeboortedatum" SelectedDate="{x:Static sys:DateTime.Now}" Margin="2" />
+            <Label Grid.Row="6" HorizontalAlignment="Left" Content="Adres:* " x:Name="LabelAdres" Margin="2" />
+            <TextBox HorizontalAlignment="Right" Grid.Row="6" Width="100" Height="25" x:Name="TextBoxAdres" Margin="2" />
+            <Label Grid.Row="7" HorizontalAlignment="Left" Content="Nummer:* " x:Name="LabelNummer" Margin="2" />
+            <TextBox HorizontalAlignment="Right" Grid.Row="7" Width="100" Height="25" x:Name="TextBoxNummer" Margin="2" />
+            <Label Grid.Row="8" HorizontalAlignment="Left" Content="Extra toevoeging: " x:Name="LabelToevoeging" Margin="2" />
+            <TextBox HorizontalAlignment="Right" Grid.Row="8" Width="100" Height="25" x:Name="TextBoxToevoeging" Margin="2" />
+            <Label Grid.Row="9" HorizontalAlignment="Left" Content="Postcode:* " x:Name="LabelPostcode" Margin="2" />
+            <TextBox HorizontalAlignment="Right" Grid.Row="9" Width="100" Height="25" x:Name="TextBoxPostcode" Margin="2" />
+            <Label Grid.Row="10" HorizontalAlignment="Left" Content="Stad:* " x:Name="LabelStad" Margin="2" />
+            <TextBox HorizontalAlignment="Right" Grid.Row="10" Width="100" Height="25" x:Name="TextBoxStad" Margin="2" />
+            <Label Grid.Row="11" HorizontalAlignment="Left" Content="Telefoonnr.: " x:Name="LabelTelefoonnr" Margin="2" />
+            <TextBox HorizontalAlignment="Right" Grid.Row="11" Width="100" Height="25" x:Name="TextBoxTelefoonnr" Margin="2" />
+            <Label Visibility="Collapsed" x:Name="SelectedMemberId" Margin="2" />
+        </Grid>
+        <Grid Grid.Column="1" Grid.Row="0">
+            <Label Content="Filter:" Margin="5,25,0,0" FontSize="14" />
+            <TextBox TextChanged="filter_TextChanged" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" Margin="10,50,0,0" Width="120" Height="25" Name="filter"/>
+        </Grid>
+        <Grid Grid.Column="0" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="ButtonAddMember" Grid.Column="0" Click="ButtonAddMember_Click" Cursor="Hand" Height="28" Margin="5" Padding="5" Background="White" VerticalAlignment="Bottom">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../Images/add.png" />
+                    <TextBlock Margin="5,0" FontSize="11" FontWeight="Light">Toevoegen</TextBlock>
+                </StackPanel>
+            </Button>
+            <Button x:Name="ButtonUpdateMember" Grid.Column="1" Click="ButtonUpdateMember_Click" Cursor="Hand" Height="28" Margin="5" Padding="5" Background="White" VerticalAlignment="Bottom">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../Images/updated.png" />
+                    <TextBlock Margin="5,0" FontSize="11" FontWeight="Light">Update</TextBlock>
+                </StackPanel>
+            </Button>
+
+        </Grid>
+            <DataGrid Name="MemberList" Grid.Column="1" Grid.Row="1" Margin="10,40,10,40" HeadersVisibility="Column" MouseDoubleClick="MemberList_MouseDoubleClick" IsReadOnly="True" />
+        <Button x:Name="ButtonDeleteMember" Grid.Column="1" Grid.Row="2" Click="ButtonDeleteMember_Click" Cursor="Hand" Height="28" Margin="120,0,0,4" Padding="5" Background="White" Foreground="Red" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="../Images/remove.png" />
+                <TextBlock Margin="5,0" FontSize="11" FontWeight="Light">Verwijder</TextBlock>
+            </StackPanel>
+        </Button>
+
+        <Label Content="Lid id:" Grid.Column="1" Grid.Row="2" Margin="0,20,0,0" FontSize="14" />
+        <TextBox Grid.Row="2" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="100" Height="25" Margin="5" x:Name="TextBoxDeleteMember"/>
+    </Grid>
+</Page>

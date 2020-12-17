@@ -1,0 +1,149 @@
+﻿<Page x:Class="TennisClub.UI.Pages.FinesPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      xmlns:local="clr-namespace:TennisClub.UI.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="FinesPage"
+      Loaded="Page_Loaded">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Button x:Name="ButtonRolesPage" Grid.Row="0" Click="ButtonFinesPage_Click" Cursor="Hand" Width="100" Height="35" Padding="5" Background="White" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,20,0">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="../Images/home.png" />
+                <TextBlock Margin="5,0" FontSize="16" FontWeight="Light">Home</TextBlock>
+            </StackPanel>
+        </Button>
+        <Button x:Name="refresh" Click="refresh_Click" Cursor="Hand" Height="35" Padding="5" Margin="0,10,130,0" Background="White" HorizontalAlignment="Right" VerticalAlignment="Top">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="../Images/reload.png" />
+                <TextBlock Margin="5,0" FontSize="16" FontWeight="Light">Herlaad pagina</TextBlock>
+            </StackPanel>
+        </Button>
+        <Border Grid.Row="1" BorderBrush="Black" BorderThickness="0,1,0,0" Margin="0,5,0,0" >
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Border Grid.Column="0" BorderBrush="Black" BorderThickness="0,0,1,0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Content="Boete toevoegen" FontSize="11" FontWeight="Bold" Margin="5" />
+                            <Label Grid.Row="1" Content="Boete nr.:*" Margin="5" />
+                            <TextBox Grid.Row="1" Margin="0,0,0,0" Height="20" Width="50" x:Name="TextBoxFineNumber" />
+                            <Label Grid.Row="2" Content="Lid id:*" Margin="5" />
+                            <TextBox Grid.Row="2" Margin="0,0,0,0" Height="20" Width="50" x:Name="TextBoxMemberId" />
+                            <Label Grid.Row="3" Content="Bedrag:*" Margin="5" />
+                            <TextBox Grid.Row="3" Margin="0,0,0,0" Height="20" Width="50" x:Name="TextBoxAmount" />
+                            <Label Grid.Row="4" Content="Uitreikingsdatum:*" Margin="5" />
+                            <DatePicker x:Name="DatePickerHandOverDate" Grid.Row="5" HorizontalAlignment="Left" Margin="5" Height="25" Width="100" SelectedDate="{x:Static sys:DateTime.Now}" />
+                            <CheckBox x:Name="CheckBoxBetalingsDatumBekend" Grid.Row="6" Content="Betalingsdatum bekend?" IsChecked="False" Click="CheckBox_Click" Margin="5"/>
+                            <DatePicker x:Name="DatePickerPayoutDate" Grid.Row="7" HorizontalAlignment="Left" Visibility="Collapsed" Margin="5" Height="25" Width="100" SelectedDate="{x:Static sys:DateTime.Now}" />
+                            <Button x:Name="ButtonAddFine" Click="ButtonAddFine_Click" Grid.Row="8" Cursor="Hand" Padding="5" Margin="5" Height="25" Background="White" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="../Images/add.png" />
+                                    <TextBlock Margin="5,0" FontSize="11" FontWeight="Light">Boete toevoegen</TextBlock>
+                                </StackPanel>
+                            </Button>
+                        </Grid>
+                    </Border>
+                    <Border Grid.Column="1" BorderBrush="Black" BorderThickness="0,0,1,0" >
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Content="Boete afbetalen" FontSize="11" FontWeight="Bold" Margin="5" />
+                            <Label Grid.Row="1" Content="Boete id: " HorizontalAlignment="Left" Margin="5"  />
+                            <TextBox x:Name="TextBoxFineId" Grid.Row="1" Width="45" Height="20" HorizontalAlignment="Left" Margin="65,0,0,0" />
+                            <Label Grid.Row="2" Content="Betalings datum:" HorizontalAlignment="Left" Margin="5" />
+                            <DatePicker x:Name="DatePickerAfbetalingsDatumToevoegen" Grid.Row="3" Margin="5" Cursor="Hand" HorizontalAlignment="Left" SelectedDate="{x:Static sys:DateTime.Now}" Height="25" />
+                            <Button x:Name="ButtonUpdateFine" Click="ButtonUpdateFine_Click" Grid.Row="4" Cursor="Hand" Padding="5" Margin="5" Height="25" Background="White" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="../Images/ticket.png" />
+                                    <TextBlock Margin="5,0" FontSize="11" FontWeight="Light">Boete afbetalen</TextBlock>
+                                </StackPanel>
+                            </Button>
+                        </Grid>
+                    </Border>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Content="Overzicht van alle boetes" FontSize="11" FontWeight="Bold" Margin="5" />
+                    <DatePicker x:Name="DatePickerAllFilterHandoutDate" Grid.Row="1" ToolTip="Uitreikingsdatum" Cursor="Hand" Width="110" Height="25" SelectedDate="{x:Static sys:DateTime.Now}" HorizontalAlignment="Left" Margin="10" />
+                    <Label Grid.Row="1" Content="-" FontSize="24" VerticalAlignment="Center" Margin="120,0,0,10" />
+                    <DatePicker x:Name="DatePickerAllFilterPayoutDate" Grid.Row="1" ToolTip="Betalingsdatum" Cursor="Hand" Width="110" Height="25" SelectedDate="{x:Static sys:DateTime.Now}" HorizontalAlignment="Center" Margin="0,0,100,0" />
+                    <Button x:Name="ButtonAllFilterDates" Click="ButtonAllFilterDates_Click" Grid.Row="1" Cursor="Hand" Padding="5" Margin="100,0,0,0" Height="25" Background="White" HorizontalAlignment="Center">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="../Images/filter.png" />
+                            <TextBlock Margin="5,0" FontSize="11" FontWeight="Light">Filter</TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <DataGrid x:Name="FinesList" Grid.Row="2" ColumnWidth="*" MouseDoubleClick="FinesList_MouseDoubleClick" HeadersVisibility="Column" IsReadOnly="True" Margin="10" />
+                    <Grid Grid.Row="3">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Content="Zoek alle boetes van één lid" FontSize="11" FontWeight="Bold" Margin="5" />
+                        <Label Content="Lid id: " Grid.Row="1" Margin="5,12,0,0" />
+                        <DatePicker x:Name="DatePickerFilterFineHandoutDate" Grid.Row="1" ToolTip="Uitreikingsdatum" Cursor="Hand" Width="110" Height="25" SelectedDate="{x:Static sys:DateTime.Now}" HorizontalAlignment="Center" Margin="10" />
+                        <Label Grid.Row="1" Content="-" FontSize="24" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="125,0,0,10" />
+                        <DatePicker x:Name="DatePickerFilterFinePayoutDate" Grid.Row="1" ToolTip="Betalingsdatum" Cursor="Hand" Width="110" Height="25" SelectedDate="{x:Static sys:DateTime.Now}" HorizontalAlignment="Center" Margin="250,0,0,0" />
+                        <Button x:Name="ButtonFilterDates" Click="ButtonFilterDates_Click" Grid.Row="1" Cursor="Hand" Padding="5" Margin="0,0,5,0" Height="25" Background="White" HorizontalAlignment="Right">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="../Images/filter.png" />
+                                <TextBlock Margin="5,0" FontSize="11" FontWeight="Light">Filter</TextBlock>
+                            </StackPanel>
+                        </Button>
+
+                        <TextBox x:Name="TextBoxSearchFine" Grid.Row="1" HorizontalAlignment="Left" Width="50" Height="20" Margin="50,0,0,0"/>
+                        <TextBox x:Name="InputMemberIdToFilterFines" Visibility="Collapsed" />
+                        <Button x:Name="ButtonSearchFine" Click="ButtonSearchFine_Click" Grid.Row="1" Cursor="Hand" Padding="5" Margin="110,0,0,0" Width="60" Height="25" HorizontalAlignment="Left" Background="White">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="../Images/search.png" />
+                                <TextBlock Margin="5,0" FontSize="11" FontWeight="Light">Zoek</TextBlock>
+                            </StackPanel>
+                        </Button>
+                        <DataGrid x:Name="FinesOfMemberList" Grid.Row="2" ColumnWidth="*" Margin="10,5,10,5" HeadersVisibility="Column" IsReadOnly="True" />
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</Page>
