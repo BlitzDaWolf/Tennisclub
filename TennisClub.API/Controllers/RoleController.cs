@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using TennisClub.BAL;
 using TennisClub.DAL.Context;
 using TennisClub.Data.Model;
@@ -41,11 +42,20 @@ namespace TennisClub.web.Controllers
         }
 
         [HttpPost("create")]
-        public RoleCreateDTO Create(RoleCreateDTO role)
+        public async Task<ActionResult<RoleCreateDTO>> Create(RoleCreateDTO role) /*RoleCreateDTO Create(RoleCreateDTO role)*/
         {
-            unitOfWork.RoleRepository.Insert(mapper.Map<Role>(role));
-            unitOfWork.Save();
-            return role;
+            //unitOfWork.RoleRepository.Insert(mapper.Map<Role>(role));
+            //unitOfWork.Save();
+            //return role;
+            if (role == null)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                await unitOfWork.RoleRepository.AddAsync(mapper.Map<Role>(role));
+                return Ok();
+            }
         }
 
         [HttpPut("update")]
