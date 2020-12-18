@@ -36,7 +36,7 @@ namespace TennisClub.DAL.Repository
             }
         }
 
-        public async Task<Role> AddAsync(Role role)
+        public async Task AddAsync(Role role)
         {
             if (role == null)
             {
@@ -45,14 +45,32 @@ namespace TennisClub.DAL.Repository
 
             try
             {
-                await context.Roles.AddAsync(role);
+                await context.Database.ExecuteSqlInterpolatedAsync($"EXECUTE dbo.CreateRole @RoleName = {role.Name}");
                 await context.SaveChangesAsync();
-                return role;
             }
             catch (Exception ex)
             {
                 throw new Exception($"{nameof(role)} could not be saved: {ex.Message}");
             }
         }
+
+        public async Task UpdateAsync(Role role)
+        {
+            if (role == null)
+            {
+                throw new ArgumentNullException($"{nameof(UpdateAsync)} entity must not be null");
+            }
+
+            try
+            {
+                await context.Database.ExecuteSqlInterpolatedAsync($"EXECUTE dbo.UpdateRole @Id = {role.Id}, @RoleName = {role.Name}");
+                await context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"{nameof(role)} could not be updated: {ex.Message}");
+            }
+        }
+
     }
 }
