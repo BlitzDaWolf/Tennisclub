@@ -22,7 +22,6 @@ namespace TennisClub.DAL.Repository
                 throw new Exception($"Couldn't retrieve entities: {ex.Message}");
             }
         }
-
         public IQueryable<Role> GetById(int id)
         {
             try
@@ -35,7 +34,6 @@ namespace TennisClub.DAL.Repository
                 throw new Exception($"Couldn't retrieve entity with id: {id}");
             }
         }
-
         public async Task AddAsync(Role role)
         {
             if (role == null)
@@ -53,7 +51,6 @@ namespace TennisClub.DAL.Repository
                 throw new Exception($"{nameof(role)} could not be saved: {ex.Message}");
             }
         }
-
         public async Task UpdateAsync(Role role)
         {
             if (role == null)

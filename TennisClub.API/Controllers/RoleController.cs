@@ -28,9 +28,6 @@ namespace TennisClub.web.Controllers
         [HttpGet]
         public IEnumerable<RoleDTO> index()
         {
-            //IEnumerable<Role> role = unitOfWork.RoleRepository.Get();
-            //var role = unitOfWork.context.Roles.ToList();
-            //return role;
             var role = unitOfWork.RoleRepository.GetAll();
             return mapper.Map<IEnumerable<RoleDTO>>(role);
         }
@@ -42,11 +39,8 @@ namespace TennisClub.web.Controllers
         }
 
         [HttpPost("create")]
-        public async Task<ActionResult<RoleCreateDTO>> Create(RoleCreateDTO role) /*RoleCreateDTO Create(RoleCreateDTO role)*/
+        public async Task<ActionResult<RoleCreateDTO>> Create(RoleCreateDTO role)
         {
-            //unitOfWork.RoleRepository.Insert(mapper.Map<Role>(role));
-            //unitOfWork.Save();
-            //return role;
             if (role == null)
             {
                 return BadRequest();
@@ -61,12 +55,6 @@ namespace TennisClub.web.Controllers
         [HttpPut("update")]
         public async Task<ActionResult<RoleUpdateDTO>> Update(RoleUpdateDTO role)
         {
-            //var mappedRole = mapper.Map<Role>(role);
-            //var roleToUpdate = unitOfWork.RoleRepository.GetById(mappedRole.Id).ToList();
-            //roleToUpdate.ForEach(x => x.Name = role.Name);
-            ////unitOfWork.RoleRepository.Update(mapper.Map<Role>(role));
-            //unitOfWork.Save();
-            //return role;
             if (role == null)
             {
                 return BadRequest();
