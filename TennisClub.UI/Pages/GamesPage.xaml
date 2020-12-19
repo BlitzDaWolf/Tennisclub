@@ -2,7 +2,8 @@
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
       xmlns:local="clr-namespace:TennisClub.UI.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
@@ -11,7 +12,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <Button x:Name="ButtonRolesPage" Grid.Row="0" Click="ButtonRolesPage_Click" Cursor="Hand" Width="100" Height="35" Padding="5" Background="White" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,20,0">
@@ -26,8 +27,73 @@
                 <TextBlock Margin="5,0" FontSize="16" FontWeight="Light">Herlaad pagina</TextBlock>
             </StackPanel>
         </Button>
-        <Grid Grid.Row="1">
-            
-        </Grid>
+        <Border Grid.Row="1" BorderBrush="Black" BorderThickness="0,1,0,1" Margin="0,5,0,0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0" BorderBrush="Black" BorderThickness="0,0,1,0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0" Content="Wedstrijden beheren" FontSize="11" FontWeight="Bold" Margin="5" />
+                        <Label Grid.Row="1" Content="Wedstrijd nr.:* " HorizontalAlignment="Left" Margin="5" />
+                        <TextBox Grid.Row="1" x:Name="TextBoxGameNr" Width="100" Height="20" Margin="50,0,0,0" />
+                        <Label Grid.Row="2" Content="Lid id:* " HorizontalAlignment="Left" Margin="5" />
+                        <TextBox Grid.Row="2" x:Name="TextBoxMemberId" Width="100" Height="20" Margin="50,0,0,0" />
+                        <Label Grid.Row="3" Content="Competitie:* " HorizontalAlignment="Left" Margin="5" />
+                        <ComboBox Grid.Row="3" x:Name="ComboBoxLeagueId" Cursor="Hand" SelectedIndex="0" Width="100" Height="20" Margin="50,0,0,0">
+                            <ComboBoxItem Content="Recreatief" />
+                            <ComboBoxItem Content="Competitie" />
+                            <ComboBoxItem Content="Toptennis" />
+                        </ComboBox>
+                        <Label Grid.Row="4" Content="Wedstrijd datum:* " HorizontalAlignment="Left" Margin="5" />
+                        <DatePicker Grid.Row="4" x:Name="DatePickerGameDate" Width="100" Height="25" Margin="50,0,0,0" Cursor="Hand" SelectedDate="{x:Static sys:DateTime.Now}" />
+                        <Grid Grid.Row="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Button x:Name="buttonAddGame" Grid.Column="0" Cursor="Hand" Height="28" Margin="5" Padding="5" Background="White" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="../Images/add.png" />
+                                    <TextBlock Margin="5,0" FontSize="11" FontWeight="Light">Wedstrijd inplannen</TextBlock>
+                                </StackPanel>
+                            </Button>
+                            <Button x:Name="ButtonUpdateGame" Grid.Column="1" Cursor="Hand" Height="28" Margin="5" Padding="5" Background="White" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="../Images/updated.png" />
+                                    <TextBlock Margin="5,0" FontSize="11" FontWeight="Light">Wedstrijd aanpassen</TextBlock>
+                                </StackPanel>
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </Border>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <DataGrid Grid.Row="0" x:Name="GamesList" Margin="10,5,10,5" HeadersVisibility="Column" IsReadOnly="True" />
+                    <Label Grid.Row="1" Content="Wedstrijd nr.:* " HorizontalAlignment="Left" Margin="5" />
+                    <TextBox Grid.Row="1" x:Name="TextBoxDeleteGame" HorizontalAlignment="Left" Width="30" Height="20" Margin="100,0,0,0" />
+                    <Button x:Name="ButtonDeleteGame" Grid.Row="1" Cursor="Hand" Height="28" Margin="160,0,0,5" Padding="5" Background="White" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="../Images/remove.png" />
+                            <TextBlock Margin="5,0" FontSize="11" FontWeight="Light">Wedstrijd verwijderen</TextBlock>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+            </Grid>
+        </Border>
     </Grid>
 </Page>

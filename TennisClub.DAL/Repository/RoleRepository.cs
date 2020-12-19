@@ -68,6 +68,5 @@ namespace TennisClub.DAL.Repository
                 throw new Exception($"{nameof(role)} could not be updated: {ex.Message}");
             }
         }
-
     }
 }
