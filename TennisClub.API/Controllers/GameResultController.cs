@@ -20,7 +20,7 @@ namespace TennisClub.API.Controllers
         }
 
         [HttpPost("create")]
-        public StatusCodeResult createResult(CreatGameResultDTO result)
+        public StatusCodeResult createResult(GameResultCreateDTO result)
         {
             unitOfWork.GameResultRepository.Insert(mapper.Map<GameResult>(result));
             unitOfWork.Save();
@@ -28,7 +28,7 @@ namespace TennisClub.API.Controllers
         }
 
         [HttpPut]
-        public UpdateGameResultDTO Update(UpdateGameResultDTO GameResult)
+        public GameResultUpdateDTO Update(GameResultUpdateDTO GameResult)
         {
             unitOfWork.GameResultRepository.Update(mapper.Map<GameResult>(GameResult));
             unitOfWork.Save();

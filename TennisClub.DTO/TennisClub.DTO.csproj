@@ -5,8 +5,4 @@
     <RootNamespace>TennisClub.DTO</RootNamespace>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="GameResult\" />
-  </ItemGroup>
-
 </Project>

@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Data;
 using TennisClub.BAL;
 using TennisClub.Data.Model;
+using TennisClub.DTO.Game;
 
 namespace TennisClub.API.Controllers
 {
@@ -10,20 +13,29 @@ namespace TennisClub.API.Controllers
     public class GameController : ControllerBase
     {
 
-        UnitOfWork unitOfWork;
+        private readonly UnitOfWork unitOfWork;
+        private readonly IMapper mapper;
 
-        public GameController(UnitOfWork unitOfWork)
+        public GameController(UnitOfWork unitOfWork, IMapper mapper)
         {
             this.unitOfWork = unitOfWork;
+            this.mapper = mapper;
         }
 
         [HttpGet]
-        public IEnumerable<Game> index([FromQuery] string includes = "")
+        public IEnumerable<GameDTO> index()
         {
-            return unitOfWork.GameRepository.Get(includeProperties: includes);
+            IEnumerable<Game> games = unitOfWork.GameRepository.Get(includeProperties: "Member,League");
+            return mapper.Map<IEnumerable<GameDTO>>(games);
         }
 
-        [HttpPost("/create")]
+        [HttpGet("{id}")]
+        public Game GetById(int id)
+        {
+            return unitOfWork.GameRepository.GetByID(id);
+        }
+
+        [HttpPost("create")]
         public Game Create(Game Game)
         {
             unitOfWork.GameRepository.Insert(Game);
@@ -31,18 +43,29 @@ namespace TennisClub.API.Controllers
             return Game;
         }
 
-        [HttpPut]
+        [HttpDelete("{id:int}")]
+        public void Delete(int? id)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    unitOfWork.GameRepository.Delete(id);
+                    unitOfWork.Save();
+                }
+            }
+            catch (DataException)
+            {
+                ModelState.AddModelError("", "Oops! Het is niet mogelijk om wijzigingen op te slaan!");
+            }
+        }
+
+        [HttpPut("update")]
         public Game Update(Game Game)
         {
             unitOfWork.GameRepository.Update(Game);
             unitOfWork.Save();
             return Game;
-        }
-
-        [HttpGet("{id}")]
-        public Game GetById(int id)
-        {
-            return unitOfWork.GameRepository.GetByID(id);
         }
     }
 }

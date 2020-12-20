@@ -24,7 +24,6 @@ namespace TennisClub.Api
                 }
             }
         }
-
         public static async Task CreateMember(MemberCreateDTO member)
         {
             string fullUri = $"{ApiHelper.BASEURL}member/create";
@@ -47,7 +46,6 @@ namespace TennisClub.Api
                 MessageBox.Show(exception.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
         public static async Task DeleteMember(int id)
         {
             string fullUri = $"{ApiHelper.BASEURL}member/{id}";

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TennisClub.DTO.Game
 {
-    public class CreatGameResultDTO
+    public class GameResultCreateDTO
     {
         public int GameId { get; set; }
         public int SetNr { get; set; }

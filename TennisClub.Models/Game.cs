@@ -13,7 +13,6 @@ namespace TennisClub.Data.Model
         public int LeagueId { get; set; }
         public virtual League League { get; set; }
         public DateTime Date { get; set; }
-        public bool IsDeleted { get; set; }
         public virtual List<GameResult> Results { get; set; }
     }
 }

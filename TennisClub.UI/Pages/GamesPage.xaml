@@ -7,7 +7,8 @@
       xmlns:local="clr-namespace:TennisClub.UI.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="GamesPage">
+      Title="GamesPage"
+      Loaded="Page_Loaded">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -63,7 +64,7 @@
                                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Button x:Name="buttonAddGame" Grid.Column="0" Cursor="Hand" Height="28" Margin="5" Padding="5" Background="White" HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <Button x:Name="buttonAddGame" Click="buttonAddGame_Click" Grid.Column="0" Cursor="Hand" Height="28" Margin="5" Padding="5" Background="White" HorizontalAlignment="Left" VerticalAlignment="Top">
                                 <StackPanel Orientation="Horizontal">
                                     <Image Source="../Images/add.png" />
                                     <TextBlock Margin="5,0" FontSize="11" FontWeight="Light">Wedstrijd inplannen</TextBlock>
