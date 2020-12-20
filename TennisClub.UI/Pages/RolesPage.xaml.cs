@@ -241,7 +241,7 @@ namespace TennisClub.UI.Pages
             }
             else if (isChecked && (startDate > endDate))
             {
-                MessageBox.Show($"Ingegeven einddatum mag niet groter zijn dan startdatum!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Ingegeven eind datum mag niet groter zijn dan de start datum!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else if (await AlreadyExistsAsyncMemberId(TextBoxMemberId.Text) && await AlreadyExistsAsyncRoleId(TextBoxRoleId.Text))
             {

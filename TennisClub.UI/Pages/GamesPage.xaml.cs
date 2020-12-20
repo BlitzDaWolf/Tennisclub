@@ -78,8 +78,11 @@ namespace TennisClub.UI.Pages
             DateTime? gameDate = DatePickerGameDate.SelectedDate;
             var games = await LoadGameData();
 
-            var getDateOfGameMember = games.FirstOrDefault(x => x.Member.Id == int.Parse(TextBoxMemberId.Text));
-            hasGameAlready = DateTime.Equals(getDateOfGameMember.Date.Date, gameDate.Value.Date);
+            if (games.Any(x => x.Member.Id == int.Parse(TextBoxMemberId.Text)))
+            {
+                var getDateOfGameMember = games.FirstOrDefault(x => x.Member.Id == int.Parse(TextBoxMemberId.Text));
+                hasGameAlready = DateTime.Equals(getDateOfGameMember.Date.Date, gameDate.Value.Date);
+            }
             return hasGameAlready;
         }
         public async Task<bool> GivenGameDateNotAfterRoleGoneAsync()
@@ -89,6 +92,7 @@ namespace TennisClub.UI.Pages
             var members = await LoadData();
             var member = members.FirstOrDefault(x => x.Id == int.Parse(TextBoxMemberId.Text));
 
+
             var memberRole = member.Roles.FirstOrDefault(x => x.Role.Name == "Speler");
             endDateOfSelectedMember = memberRole.EndDate;
 
@@ -96,6 +100,7 @@ namespace TennisClub.UI.Pages
             {
                 hasGameAlready = true;
             }
+
             return hasGameAlready;
         }
 
@@ -133,17 +138,17 @@ namespace TennisClub.UI.Pages
         }
         private async void buttonAddGame_Click(object sender, RoutedEventArgs e)
         {
-            bool memberIsNotPlayer = false;
             MemberDTO selectedMember = new MemberDTO();
 
             var members = await LoadData();
             var memberWithRoles = await LoadMemberRoleData();
             var games = await LoadGameData();
 
+            var checkMemberHasRoleSpeler = members.FirstOrDefault(x => x.Id == int.Parse(TextBoxMemberId.Text));
+
             if (TextBoxMemberId.Text.Length != 0 && TextBoxGameNr.Text.Length != 0)
             {
-                var member = members.FirstOrDefault(x => x.Id == int.Parse(TextBoxMemberId.Text));
-                selectedMember = member;
+                selectedMember = members.FirstOrDefault(x => x.Id == int.Parse(TextBoxMemberId.Text));
             }
 
             if (TextBoxGameNr.Text.Length == 0 || TextBoxMemberId.Text.Length == 0)
@@ -158,9 +163,13 @@ namespace TennisClub.UI.Pages
             {
                 MessageBox.Show($"Lid met id: {TextBoxMemberId.Text} bestaat niet!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            else if (memberIsNotPlayer)
+            else if (!checkMemberHasRoleSpeler.Roles.Any(x => x.Role.Name == "Speler"))
             {
                 MessageBox.Show($"Lid met id: {TextBoxMemberId.Text} heeft de rol 'Speler' niet!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else if (DateTime.Now.Date > DatePickerGameDate.SelectedDate.Value.Date)
+            {
+                MessageBox.Show($"Ingegeven wedstrijd datum mag niet kleiner zijn dan datum van vandaag!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else if (await GivenGameDateExistMemberGameAsync())
             {
