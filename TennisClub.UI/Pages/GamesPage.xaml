@@ -88,7 +88,7 @@
                     </Grid.RowDefinitions>
                     <Label Grid.Row="0" Content="Zoek op basis van datum naar wedstrijden" FontSize="11" FontWeight="Bold" Margin="5" />
                     <Label Content="Datum: " Grid.Row="1" Margin="5,0,0,0" />
-                    <DatePicker x:Name="DatePickerFilterGameDate" Grid.Row="1" HorizontalAlignment="Left" Cursor="Hand" Width="100" Height="25" Margin="70,0,0,0" SelectedDate="{x:Static sys:DateTime.Now}" />
+                    <DatePicker x:Name="DatePickerFilterGameDate" Grid.Row="1" HorizontalAlignment="Left" Cursor="Hand" Width="100" Height="25" Margin="60,0,0,0" SelectedDate="{x:Static sys:DateTime.Now}" />
                     <Button x:Name="ButtonFilterGameDate" Grid.Row="1" Click="ButtonFilterGameDate_Click" Cursor="Hand" Padding="5" Height="25" Margin="0,0,280,0" Background="White" HorizontalAlignment="Center">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="../Images/search.png" />
@@ -148,7 +148,9 @@
                     <TextBox x:Name="SelectedGameResult" Grid.Row="1" Width="100" HorizontalAlignment="Right" Visibility="Collapsed" />
                 </Grid>
             </Border>
-            <DataGrid Grid.Column="1" ColumnWidth="*" MouseDoubleClick="GameResultList_MouseDoubleClick" x:Name="GameResultList" Margin="10,5,10,5" HeadersVisibility="Column" IsReadOnly="True" />
+            <Border Grid.Column="1" BorderBrush="Black" BorderThickness="0,0,1,0">
+                <DataGrid ColumnWidth="*" MouseDoubleClick="GameResultList_MouseDoubleClick" x:Name="GameResultList" Margin="10,5,10,5" HeadersVisibility="Column" IsReadOnly="True" />
+            </Border>
             <Grid Grid.Column="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"></RowDefinition>
@@ -157,20 +159,21 @@
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0" Content="Zoek alle wedstrijden incl. resultaten van één lid" FontSize="11" FontWeight="Bold" Margin="5" />
                 <Label Content="Lid id: " Grid.Row="1" Margin="5,0,0,0" />
-                <TextBox x:Name="TextBoxSearchGameResulstsMember" Grid.Row="1" Width="30" Height="20" HorizontalAlignment="Left" Margin="45,0,0,0" />
-                <Button x:Name="ButtonSearchGameResultsMember" Grid.Row="1" Cursor="Hand" Padding="5" Margin="85,0,0,0" Width="60" Height="25" HorizontalAlignment="Left" Background="White">
+                <TextBox x:Name="TextBoxSearchGameResulstsMember" Grid.Row="1" Width="30" Height="20" HorizontalAlignment="Left" Margin="45,0,0,3" VerticalAlignment="Bottom" />
+                <Button x:Name="ButtonSearchGameResultsMember" Click="ButtonSearchGameResultsMember_Click" Grid.Row="1" Cursor="Hand" Padding="5" Margin="85,0,0,0" Width="60" Height="25" HorizontalAlignment="Left" Background="White">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="../Images/search.png" />
                         <TextBlock Margin="5,0" FontSize="11" FontWeight="Light">Zoek</TextBlock>
                     </StackPanel>
                 </Button>
                 <DatePicker x:Name="DatePickerFilterGameResulstsMember" Grid.Row="1" ToolTip="Wedstrijd datum" Cursor="Hand" Width="110" Height="25" SelectedDate="{x:Static sys:DateTime.Now}" HorizontalAlignment="Center" Margin="90,0,0,0" />
-                <Button x:Name="ButtonFilterGameResultsMember" Grid.Row="1" Cursor="Hand" Padding="5" Margin="0,0,10,0" Height="25" Background="White" HorizontalAlignment="Right">
+                <Button x:Name="ButtonFilterGameResultsMember" Click="ButtonFilterGameResultsMember_Click" Grid.Row="1" Cursor="Hand" Padding="5" Margin="0,0,10,0" Height="25" Background="White" HorizontalAlignment="Right">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="../Images/filter.png" />
                         <TextBlock Margin="5,0" FontSize="11" FontWeight="Light">Filter</TextBlock>
                     </StackPanel>
                 </Button>
+                <TextBox x:Name="SelectedMemberToFilterGameResults" Grid.Row="1" Width="100" HorizontalAlignment="Right" Visibility="Collapsed" />
                 <DataGrid Grid.Row="2" ColumnWidth="*" x:Name="GameResulstsOfMemberList" Margin="10,5,10,5" HeadersVisibility="Column" IsReadOnly="True" />
             </Grid>
         </Grid>

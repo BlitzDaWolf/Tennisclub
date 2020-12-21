@@ -213,6 +213,8 @@ namespace TennisClub.UI.Pages
         {
             await LoadGameData();
             ClearTextBoxes();
+            SelectedMemberToFilterGameResults.Text = "";
+            GameResulstsOfMemberList.ItemsSource = null;
         }
         private void ButtonGamesPage_Click(object sender, RoutedEventArgs e)
         {
@@ -408,6 +410,68 @@ namespace TennisClub.UI.Pages
 
             TextBoxGameNrResult.IsEnabled = false;
             TextBoxSetNr.IsEnabled = false;
+        }
+        private async void ButtonSearchGameResultsMember_Click(object sender, RoutedEventArgs e)
+        {
+            var members = await LoadMemberData();
+            var games = await LoadGameData();
+            var gameWithResults = await LoadGameResultData();
+
+            if (TextBoxSearchGameResulstsMember.Text.Length == 0)
+            {
+                MessageBox.Show($"Controleer of alle verplichte velden correct zijn ingevuld!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else if (!members.Any(x => x.Id == int.Parse(TextBoxSearchGameResulstsMember.Text)))
+            {
+                MessageBox.Show($"Lid met id: {TextBoxSearchGameResulstsMember.Text} bestaat niet!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else if (!gameWithResults.Any(x => x.Game.Member.Id == int.Parse(TextBoxSearchGameResulstsMember.Text)))
+            {
+                MessageBox.Show($"Lid met id: {TextBoxSearchGameResulstsMember.Text} heeft geen wedstrijden en/of heeft geen wedstrijd uitslagen om op te zoeken!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                GameResulstsOfMemberList.ItemsSource = from gameWithResult in gameWithResults
+                                                       where gameWithResult.Game.Member.Id.ToString().Contains(TextBoxSearchGameResulstsMember.Text)
+                                                       select new { gameWithResult.Id, gameId = gameWithResult.Game.Id, gameWithResult.SetNr, gameWithResult.ScoreTeamMember, gameWithResult.ScoreOpponent };
+                GameResulstsOfMemberList.Columns[0].Header = "Id";
+                GameResulstsOfMemberList.Columns[1].Header = "Wedstrijd Id";
+                GameResulstsOfMemberList.Columns[2].Header = "Set nr.";
+                GameResulstsOfMemberList.Columns[3].Header = "Score teamlid";
+                GameResulstsOfMemberList.Columns[4].Header = "Score tegenstander";
+                SelectedMemberToFilterGameResults.Text = TextBoxSearchGameResulstsMember.Text;
+                ClearTextBoxes();
+            }
+        }
+        private async void ButtonFilterGameResultsMember_Click(object sender, RoutedEventArgs e)
+        {
+            var gameWithResults = await LoadGameResultData();
+
+            if (!GameResulstsOfMemberList.HasItems)
+            {
+                MessageBox.Show($"Het tabel waarop u wilt gaan filteren is leeg. Zorg er eerst voor dat u van minstens één wedstrijd van een lid de resultaten ophaalt om daarop te gaan filteren.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                var listOfMemberGamesResults = gameWithResults.Where(x => x.Game.Member.Id == int.Parse(SelectedMemberToFilterGameResults.Text)).Select(x => x).ToList();
+
+                if (!listOfMemberGamesResults.Any(x => x.Game.Date.Date == DatePickerFilterGameResulstsMember.SelectedDate.Value.Date))
+                {
+                    MessageBox.Show($"Er zijn geen resultaten terug gevonden.", "Informatie", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    GameResulstsOfMemberList.ItemsSource = from gameWithResult in listOfMemberGamesResults
+                                                           where gameWithResult.Game.Date.Date == DatePickerFilterGameResulstsMember.SelectedDate.Value.Date
+                                                           select new { gameWithResult.Id, gameId = gameWithResult.Game.Id, gameWithResult.SetNr, gameWithResult.ScoreTeamMember, gameWithResult.ScoreOpponent };
+                    GameResulstsOfMemberList.Columns[0].Header = "Id";
+                    GameResulstsOfMemberList.Columns[1].Header = "Wedstrijd Id";
+                    GameResulstsOfMemberList.Columns[2].Header = "Set nr.";
+                    GameResulstsOfMemberList.Columns[3].Header = "Score teamlid";
+                    GameResulstsOfMemberList.Columns[4].Header = "Score tegenstander";
+                    SelectedMemberToFilterGameResults.Text = TextBoxSearchGameResulstsMember.Text;
+                }
+            }
         }
         #endregion
     }
