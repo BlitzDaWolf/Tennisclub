@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using TennisClub.BAL;
 using TennisClub.Data.Model;
 using TennisClub.DTO.Game;
@@ -19,15 +20,22 @@ namespace TennisClub.API.Controllers
             this.mapper = mapper;
         }
 
+        [HttpGet]
+        public IEnumerable<GameResultDTO> index()
+        {
+            IEnumerable<GameResult> gameResult = unitOfWork.GameResultRepository.Get(includeProperties: "Game");
+            return mapper.Map<IEnumerable<GameResultDTO>>(gameResult);
+        }
+
         [HttpPost("create")]
-        public StatusCodeResult createResult(GameResultCreateDTO result)
+        public GameResultCreateDTO createResult(GameResultCreateDTO result)
         {
             unitOfWork.GameResultRepository.Insert(mapper.Map<GameResult>(result));
             unitOfWork.Save();
-            return Ok();
+            return result;
         }
 
-        [HttpPut]
+        [HttpPut("update")]
         public GameResultUpdateDTO Update(GameResultUpdateDTO GameResult)
         {
             unitOfWork.GameResultRepository.Update(mapper.Map<GameResult>(GameResult));

@@ -46,54 +46,54 @@ namespace TennisClub.UI.Api
                 MessageBox.Show(exception.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        //public static async Task DeleteMember(int id)
-        //{
-        //    string fullUri = $"{ApiHelper.BASEURL}member/{id}";
-        //    MessageBoxResult messageBoxResult = MessageBox.Show($"Bent u zeker dat u de member met id: {id} wilt verwijderen?", "Waarschuwing", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-        //    if (messageBoxResult == MessageBoxResult.Yes)
-        //    {
-        //        try
-        //        {
-        //            using (HttpResponseMessage response = await ApiHelper.ApiClient.DeleteAsync(fullUri))
-        //            {
-        //                if (!response.IsSuccessStatusCode)
-        //                {
-        //                    throw new Exception(response.ReasonPhrase);
-        //                }
-        //                else
-        //                {
-        //                    MessageBox.Show("Member is succesvol verwijderd!", "Informatie", MessageBoxButton.OK, MessageBoxImage.Information);
-        //                }
-        //            }
-        //        }
-        //        catch (Exception exception)
-        //        {
-        //            MessageBox.Show(exception.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-        //        }
-        //    }
-        //}
-        //public static async Task UpdateMember(UpdateMemberDTO member)
-        //{
-        //    string fullUri = $"{ApiHelper.BASEURL}member/update";
-        //    try
-        //    {
-        //        using (HttpResponseMessage response = await ApiHelper.ApiClient.PutAsJsonAsync(fullUri, member))
-        //        {
-        //            if (!response.IsSuccessStatusCode)
-        //            {
-        //                throw new Exception(response.ReasonPhrase);
-        //            }
-        //            else
-        //            {
-        //                MessageBox.Show("Member is succesvol geüpdate!", "Informatie", MessageBoxButton.OK, MessageBoxImage.Information);
-        //            }
-        //        }
-        //    }
-        //    catch (Exception exception)
-        //    {
-        //        MessageBox.Show(exception.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-        //    }
+        public static async Task DeleteGame(int id)
+        {
+            string fullUri = $"{ApiHelper.BASEURL}game/{id}";
+            MessageBoxResult messageBoxResult = MessageBox.Show($"Bent u zeker dat u de wedstrijd met id: {id} wilt verwijderen?", "Waarschuwing", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (messageBoxResult == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    using (HttpResponseMessage response = await ApiHelper.ApiClient.DeleteAsync(fullUri))
+                    {
+                        if (!response.IsSuccessStatusCode)
+                        {
+                            throw new Exception(response.ReasonPhrase);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Wedstrijd is succesvol verwijderd!", "Informatie", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+                    }
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show(exception.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+        public static async Task UpdateGame(GameUpdateDTO game)
+        {
+            string fullUri = $"{ApiHelper.BASEURL}game/update";
+            try
+            {
+                using (HttpResponseMessage response = await ApiHelper.ApiClient.PutAsJsonAsync(fullUri, game))
+                {
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        throw new Exception(response.ReasonPhrase);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Wedstrijd is succesvol geüpdate!", "Informatie", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.ToString(), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
-        //}
+        }
     }
 }

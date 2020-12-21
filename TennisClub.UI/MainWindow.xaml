@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TennisClub"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="Tennis club - El Jattari Azdine" Height="550" Width="1000"
+        Title="Tennis club - El Jattari Azdine" Height="520" Width="1000"
         Icon="Images/tennisfoto.ico">
     <Grid>
         <Frame Source="Pages/HomePage.xaml" NavigationUIVisibility="Hidden" />

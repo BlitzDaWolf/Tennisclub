@@ -10,6 +10,5 @@ namespace TennisClub.Data.Model
         public int SetNr { get; set; }
         public int ScoreTeamMember { get; set; }
         public int ScoreOpponent { get; set; }
-        public bool IsDeleted { get; set; }
     }
 }

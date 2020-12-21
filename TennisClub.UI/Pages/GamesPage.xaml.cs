@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,7 +22,7 @@ namespace TennisClub.UI.Pages
 
         #region Selfmade Methods
         //Member
-        public async Task<List<MemberDTO>> LoadData()
+        public async Task<List<MemberDTO>> LoadMemberData()
         {
             var listMembers = await MemberAPI.GetMembers();
             return listMembers;
@@ -32,7 +33,7 @@ namespace TennisClub.UI.Pages
         {
             var gamesList = await GameAPI.GetGames();
             GamesList.ItemsSource = from game in gamesList
-                                    select new { game.Id, game.GameNumber, Lid_id = game.Member.Id, game.League.Name, Datum = game.Date.ToString("dd/MM/yyyy") };
+                                    select new { game.Id, game.GameNumber, LidId = game.Member.Id, game.League.Name, Datum = game.Date.ToString("dd/MM/yyyy") };
             GamesList.Columns[0].Header = "Id";
             GamesList.Columns[1].Header = "Wedstrijd nr.";
             GamesList.Columns[2].Header = "Lid Id";
@@ -72,6 +73,41 @@ namespace TennisClub.UI.Pages
             };
             await GameAPI.CreateGame(gameToCreate);
         }
+        public async Task RemoveGameData()
+        {
+            await GameAPI.DeleteGame(int.Parse(TextBoxDeleteGame.Text));
+        }
+        public async Task UpdateGameData()
+        {
+            ComboBoxItem selectedLeague = (ComboBoxItem)ComboBoxLeagueId.SelectedItem;
+            DateTime? selectedDate = DatePickerGameDate.SelectedDate;
+            string formattedDate = selectedDate.Value.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
+            string leagueName = selectedLeague.Content.ToString();
+            int updatedLeague;
+            if (leagueName == "Recreatief")
+            {
+                updatedLeague = 3;
+            }
+            else if (leagueName == "Competitie")
+            {
+                updatedLeague = 4;
+            }
+            else
+            {
+                updatedLeague = 5;
+
+            }
+
+            GameUpdateDTO game = new GameUpdateDTO
+            {
+                Id = int.Parse(SelectedGame.Text),
+                GameNumber = TextBoxGameNr.Text,
+                MemberId = int.Parse(TextBoxMemberId.Text),
+                LeagueId = updatedLeague,
+                Date = DateTime.Parse(formattedDate)
+            };
+            await GameAPI.UpdateGame(game);
+        }
         public async Task<bool> GivenGameDateExistMemberGameAsync()
         {
             bool hasGameAlready = false;
@@ -89,7 +125,7 @@ namespace TennisClub.UI.Pages
         {
             DateTime endDateOfSelectedMember = new DateTime();
             bool hasGameAlready = false;
-            var members = await LoadData();
+            var members = await LoadMemberData();
             var member = members.FirstOrDefault(x => x.Id == int.Parse(TextBoxMemberId.Text));
 
 
@@ -104,6 +140,45 @@ namespace TennisClub.UI.Pages
             return hasGameAlready;
         }
 
+        //GameResult
+        public async Task<List<GameResultDTO>> LoadGameResultData()
+        {
+            var gameResultList = await GameResultAPI.GetGameResult();
+            GameResultList.ItemsSource = from gameResult in gameResultList
+                                         select new { gameResult.Id, gameId = gameResult.Game.Id, gameResult.SetNr, gameResult.ScoreTeamMember, gameResult.ScoreOpponent };
+            GameResultList.Columns[0].Header = "Id";
+            GameResultList.Columns[1].Header = "Wedstrijd Id";
+            GameResultList.Columns[2].Header = "Set nr.";
+            GameResultList.Columns[3].Header = "Score teamlid";
+            GameResultList.Columns[4].Header = "Score tegenstander";
+
+            return gameResultList;
+        }
+        public async Task AddGameResultData()
+        {
+            var gameResultToCreate = new GameResultCreateDTO()
+            {
+                GameId = int.Parse(TextBoxGameNrResult.Text),
+                SetNr = int.Parse(TextBoxSetNr.Text),
+                ScoreTeamMember = int.Parse(TextBoxScoreTeamMember.Text),
+                ScoreOpponent = int.Parse(TextBoxScoreOpponent.Text)
+            };
+            await GameResultAPI.CreateGameResult(gameResultToCreate);
+        }
+        public async Task UpdateGameResultData()
+        {
+            GameResultUpdateDTO gameResult = new GameResultUpdateDTO
+            {
+                Id = int.Parse(SelectedGameResult.Text),
+                GameId = int.Parse(TextBoxGameNrResult.Text),
+                SetNr = int.Parse(TextBoxSetNr.Text),
+                ScoreTeamMember = int.Parse(TextBoxScoreTeamMember.Text),
+                ScoreOpponent = int.Parse(TextBoxScoreOpponent.Text)
+            };
+            await GameResultAPI.UpdateGameResult(gameResult);
+        }
+
+
         //MemberRole
         public async Task<List<MemberRoleDTO>> LoadMemberRoleData()
         {
@@ -116,7 +191,14 @@ namespace TennisClub.UI.Pages
             TextBoxGameNr.Text = "";
             TextBoxDeleteGame.Text = "";
             TextBoxMemberId.Text = "";
+            TextBoxGameNrResult.Text = "";
+            TextBoxSetNr.Text = "";
+            TextBoxScoreOpponent.Text = "";
+            TextBoxScoreTeamMember.Text = "";
+            TextBoxSearchGameResulstsMember.Text = "";
+            DatePickerFilterGameResulstsMember.SelectedDate = DateTime.Now;
             DatePickerGameDate.SelectedDate = DateTime.Now;
+            DatePickerFilterGameDate.SelectedDate = DateTime.Now;
             ComboBoxLeagueId.SelectedIndex = 0;
         }
         #endregion
@@ -125,13 +207,14 @@ namespace TennisClub.UI.Pages
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             await LoadGameData();
+            await LoadGameResultData();
         }
         private async void refresh_Click(object sender, RoutedEventArgs e)
         {
             await LoadGameData();
             ClearTextBoxes();
         }
-        private void ButtonRolesPage_Click(object sender, RoutedEventArgs e)
+        private void ButtonGamesPage_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.GoBack();
             GC.Collect();
@@ -140,7 +223,7 @@ namespace TennisClub.UI.Pages
         {
             MemberDTO selectedMember = new MemberDTO();
 
-            var members = await LoadData();
+            var members = await LoadMemberData();
             var memberWithRoles = await LoadMemberRoleData();
             var games = await LoadGameData();
 
@@ -185,6 +268,146 @@ namespace TennisClub.UI.Pages
                 await LoadGameData();
                 ClearTextBoxes();
             }
+        }
+        private async void ButtonDeleteGame_Click(object sender, RoutedEventArgs e)
+        {
+            var games = await LoadGameData();
+
+            if (TextBoxDeleteGame.Text.Length == 0)
+            {
+                MessageBox.Show($"Controleer of veld correct is ingevuld!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else if (!games.Any(x => x.Id == int.Parse(TextBoxDeleteGame.Text)))
+            {
+                MessageBox.Show($"Wedstrijd met id: {TextBoxDeleteGame.Text} bestaat niet!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                await RemoveGameData();
+                await LoadGameData();
+                ClearTextBoxes();
+            }
+        }
+        private async void ButtonUpdateGame_Click(object sender, RoutedEventArgs e)
+        {
+            var games = await LoadGameData();
+            var members = await LoadMemberData();
+
+            if (SelectedGame.Text.Length == 0)
+            {
+                MessageBox.Show($"Selecteer eerst een wedstrijd uit de tabel door te dubbelklikken op de wedstrijd die u wenst aan te passen.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else if (!members.Any(x => x.Id == int.Parse(TextBoxMemberId.Text)))
+            {
+                MessageBox.Show($"Lid met id: {TextBoxMemberId.Text} bestaat niet!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                await UpdateGameData();
+                await LoadGameData();
+                ClearTextBoxes();
+                SelectedGame.Text = "";
+                TextBoxGameNr.IsEnabled = true;
+            }
+        }
+        private void GamesList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            dynamic selectedGame = GamesList.SelectedCells[0].Item;
+
+            int selectedGameId = selectedGame.Id;
+            SelectedGame.Text = selectedGameId.ToString();
+            string gameNumber = selectedGame.GameNumber;
+            TextBoxGameNr.Text = gameNumber.ToString();
+            int memberId = selectedGame.LidId;
+            TextBoxMemberId.Text = memberId.ToString();
+            DatePickerGameDate.SelectedDate = DateTime.ParseExact(selectedGame.Datum, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            string leagueName = selectedGame.Name;
+            if (leagueName == "Recreatief")
+            {
+                ComboBoxLeagueId.SelectedIndex = 0;
+            }
+            else if (leagueName == "Competitie")
+            {
+                ComboBoxLeagueId.SelectedIndex = 1;
+            }
+            else
+            {
+                ComboBoxLeagueId.SelectedIndex = 2;
+            }
+            TextBoxGameNr.IsEnabled = false;
+        }
+        private async void ButtonFilterGameDate_Click(object sender, RoutedEventArgs e)
+        {
+            var gamesList = await LoadGameData();
+            GamesList.ItemsSource = from game in gamesList
+                                    where DateTime.Equals(game.Date.Date, DatePickerFilterGameDate.SelectedDate.Value.Date)
+                                    select new { game.Id, game.GameNumber, LidId = game.Member.Id, game.League.Name, Datum = game.Date.ToString("dd/MM/yyyy") };
+            GamesList.Columns[0].Header = "Id";
+            GamesList.Columns[1].Header = "Wedstrijd nr.";
+            GamesList.Columns[2].Header = "Lid Id";
+            GamesList.Columns[3].Header = "Competitie";
+            GamesList.Columns[4].Header = "Datum";
+            ClearTextBoxes();
+        }
+
+        //GameResult
+        private async void buttonAddGameResult_Click(object sender, RoutedEventArgs e)
+        {
+            var games = await LoadGameData();
+            var gamesWithResults = await LoadGameResultData();
+
+            if (TextBoxGameNrResult.Text.Length == 0 || TextBoxSetNr.Text.Length == 0 || TextBoxScoreTeamMember.Text.Length == 0 || TextBoxScoreOpponent.Text.Length == 0)
+            {
+                MessageBox.Show($"Controleer of alle verplichte velden correct zijn ingevuld!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else if (!games.Any(x => x.Id == int.Parse(TextBoxGameNrResult.Text)))
+            {
+                MessageBox.Show($"Wedstrijd met id: {TextBoxGameNrResult.Text} bestaat niet!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else if (gamesWithResults.Any(x => x.Game.Id == int.Parse(TextBoxGameNrResult.Text)))
+            {
+                MessageBox.Show($"Wedstrijd met id: {TextBoxGameNrResult.Text} heeft al een uitslag gekregen.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else if (gamesWithResults.Any(x => x.SetNr == int.Parse(TextBoxSetNr.Text)))
+            {
+                MessageBox.Show($"Set nummer: {TextBoxSetNr.Text} bestaat al!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                await AddGameResultData();
+                await LoadGameResultData();
+                ClearTextBoxes();
+            }
+        }
+        private async void ButtonUpdateGameResult_Click(object sender, RoutedEventArgs e)
+        {
+            var gameWithResults = await LoadGameResultData();
+
+            if (SelectedGameResult.Text.Length == 0)
+            {
+                MessageBox.Show($"Selecteer eerst een wedstrijd uit de tabel door te dubbelklikken op de wedstrijd die u wenst aan te passen.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                await UpdateGameResultData();
+                await LoadGameResultData();
+                ClearTextBoxes();
+                SelectedGameResult.Text = "";
+                TextBoxGameNr.IsEnabled = true;
+                TextBoxSetNr.IsEnabled = true;
+            }
+        }
+        private void GameResultList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            dynamic selectedGame = GameResultList.SelectedCells[0].Item;
+            SelectedGameResult.Text = selectedGame.Id.ToString();
+            TextBoxGameNrResult.Text = selectedGame.gameId.ToString();
+            TextBoxSetNr.Text = selectedGame.SetNr.ToString();
+            TextBoxScoreTeamMember.Text = selectedGame.ScoreTeamMember.ToString();
+            TextBoxScoreOpponent.Text = selectedGame.ScoreOpponent.ToString();
+
+            TextBoxGameNrResult.IsEnabled = false;
+            TextBoxSetNr.IsEnabled = false;
         }
         #endregion
     }

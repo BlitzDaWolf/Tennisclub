@@ -180,7 +180,7 @@ namespace TennisClub
             }
             else
             {
-                MessageBox.Show($"Member met ingegeven federatienr: {TextBoxFederatieNr.Text} bestaat al.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Lid met ingegeven federatienr: {TextBoxFederatieNr.Text} bestaat al.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         private async void ButtonDeleteMember_Click(object sender, RoutedEventArgs e)
@@ -191,7 +191,7 @@ namespace TennisClub
             }
             else if (!await IdExists(int.Parse(TextBoxDeleteMember.Text)))
             {
-                MessageBox.Show($"Member met id: {TextBoxDeleteMember.Text} bestaat niet!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Lid met id: {TextBoxDeleteMember.Text} bestaat niet!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else
             {
@@ -215,14 +215,13 @@ namespace TennisClub
                 }
             }
 
-
             if (EmptyBoxes())
             {
                 MessageBox.Show($"Controleer of alle verplichte velden correct zijn ingevuld!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else if (memberNotExist)
             {
-                MessageBox.Show($"Member met id: {TextBoxFederatieNr.Text} bestaat niet!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Lid met id: {TextBoxFederatieNr.Text} bestaat niet!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else
             {

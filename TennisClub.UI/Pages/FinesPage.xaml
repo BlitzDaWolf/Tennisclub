@@ -131,7 +131,6 @@
                                 <TextBlock Margin="5,0" FontSize="11" FontWeight="Light">Filter</TextBlock>
                             </StackPanel>
                         </Button>
-
                         <TextBox x:Name="TextBoxSearchFine" Grid.Row="1" HorizontalAlignment="Left" Width="50" Height="20" Margin="50,0,0,0"/>
                         <TextBox x:Name="InputMemberIdToFilterFines" Visibility="Collapsed" />
                         <Button x:Name="ButtonSearchFine" Click="ButtonSearchFine_Click" Grid.Row="1" Cursor="Hand" Padding="5" Margin="110,0,0,0" Width="60" Height="25" HorizontalAlignment="Left" Background="White">

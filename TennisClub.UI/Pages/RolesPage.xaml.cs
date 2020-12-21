@@ -106,8 +106,6 @@ namespace TennisClub.UI.Pages
                     startDate = role.StartDate;
                 }
             }
-            _ = roleId;
-            _ = memberId;
 
             DateTime? endDate = DatePickerOnCreateEndDate.SelectedDate;
             string formattedDate2 = endDate.Value.ToString("dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
@@ -120,7 +118,6 @@ namespace TennisClub.UI.Pages
                 StartDate = startDate,
                 EndDate = DateTime.Parse(formattedDate2)
             };
-            _ = memberRoleToUpdate;
             await MemberRoleAPI.UpdateMemberRole(memberRoleToUpdate);
         }
         private async Task<bool> AlreadyExistsAsyncMemberId(string memberId)
@@ -168,7 +165,6 @@ namespace TennisClub.UI.Pages
             DatePickerOnCreateEndDate.SelectedDate = DateTime.Now;
             DatePickerStartDate.SelectedDate = DateTime.Now;
         }
-
         #endregion
 
         #region WPF Event Handlers
@@ -298,6 +294,7 @@ namespace TennisClub.UI.Pages
             {
                 await DeleteMemberRoleData();
                 await LoadMemberRoleData();
+                ClearTextBoxes();
             }
         }
         private void CheckBoxEindButton_Click(object sender, RoutedEventArgs e)

@@ -6,7 +6,7 @@
       xmlns:sys="clr-namespace:System;assembly=mscorlib"
       xmlns:local="clr-namespace:TennisClub.UI.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="480" d:DesignWidth="800"
       Title="GamesPage"
       Loaded="Page_Loaded">
 
@@ -14,9 +14,9 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <Button x:Name="ButtonRolesPage" Grid.Row="0" Click="ButtonRolesPage_Click" Cursor="Hand" Width="100" Height="35" Padding="5" Background="White" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,20,0">
+        <Button x:Name="ButtonGamesPage" Grid.Row="0" Click="ButtonGamesPage_Click" Cursor="Hand" Width="100" Height="35" Padding="5" Background="White" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,20,0">
             <StackPanel Orientation="Horizontal">
                 <Image Source="../Images/home.png" />
                 <TextBlock Margin="5,0" FontSize="16" FontWeight="Light">Home</TextBlock>
@@ -70,7 +70,7 @@
                                     <TextBlock Margin="5,0" FontSize="11" FontWeight="Light">Wedstrijd inplannen</TextBlock>
                                 </StackPanel>
                             </Button>
-                            <Button x:Name="ButtonUpdateGame" Grid.Column="1" Cursor="Hand" Height="28" Margin="5" Padding="5" Background="White" HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <Button x:Name="ButtonUpdateGame" Click="ButtonUpdateGame_Click" Grid.Column="1" Cursor="Hand" Height="28" Margin="5" Padding="5" Background="White" HorizontalAlignment="Left" VerticalAlignment="Top">
                                 <StackPanel Orientation="Horizontal">
                                     <Image Source="../Images/updated.png" />
                                     <TextBlock Margin="5,0" FontSize="11" FontWeight="Light">Wedstrijd aanpassen</TextBlock>
@@ -81,20 +81,98 @@
                 </Border>
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <DataGrid Grid.Row="0" x:Name="GamesList" Margin="10,5,10,5" HeadersVisibility="Column" IsReadOnly="True" />
-                    <Label Grid.Row="1" Content="Wedstrijd nr.:* " HorizontalAlignment="Left" Margin="5" />
-                    <TextBox Grid.Row="1" x:Name="TextBoxDeleteGame" HorizontalAlignment="Left" Width="30" Height="20" Margin="100,0,0,0" />
-                    <Button x:Name="ButtonDeleteGame" Grid.Row="1" Cursor="Hand" Height="28" Margin="160,0,0,5" Padding="5" Background="White" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <Label Grid.Row="0" Content="Zoek op basis van datum naar wedstrijden" FontSize="11" FontWeight="Bold" Margin="5" />
+                    <Label Content="Datum: " Grid.Row="1" Margin="5,0,0,0" />
+                    <DatePicker x:Name="DatePickerFilterGameDate" Grid.Row="1" HorizontalAlignment="Left" Cursor="Hand" Width="100" Height="25" Margin="70,0,0,0" SelectedDate="{x:Static sys:DateTime.Now}" />
+                    <Button x:Name="ButtonFilterGameDate" Grid.Row="1" Click="ButtonFilterGameDate_Click" Cursor="Hand" Padding="5" Height="25" Margin="0,0,280,0" Background="White" HorizontalAlignment="Center">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="../Images/search.png" />
+                            <TextBlock Margin="5,0" FontSize="11" FontWeight="Light">Zoek</TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <DataGrid Grid.Row="2" ColumnWidth="*" MouseDoubleClick="GamesList_MouseDoubleClick" x:Name="GamesList" Margin="10,5,10,5" HeadersVisibility="Column" IsReadOnly="True" />
+                    <Label Grid.Row="3" Content="Wedstrijd nr.:* " HorizontalAlignment="Left" Margin="5" />
+                    <TextBox Grid.Row="3" x:Name="TextBoxDeleteGame" HorizontalAlignment="Left" Width="30" Height="20" Margin="100,0,0,0" />
+                    <Button x:Name="ButtonDeleteGame" Click="ButtonDeleteGame_Click" Grid.Row="3" Cursor="Hand" Height="28" Margin="160,5,0,5" Padding="5" Background="White" HorizontalAlignment="Left" VerticalAlignment="Top">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="../Images/remove.png" />
                             <TextBlock Margin="5,0" FontSize="11" FontWeight="Light">Wedstrijd verwijderen</TextBlock>
                         </StackPanel>
                     </Button>
+                    <TextBox x:Name="SelectedGame" Grid.Row="1" Width="100" HorizontalAlignment="Right" Visibility="Collapsed" />
                 </Grid>
             </Grid>
         </Border>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="0" BorderBrush="Black" BorderThickness="0,0,1,0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Content="Resultaten van wedstrijden beheren" FontSize="11" FontWeight="Bold" Margin="5" />
+                    <Label Grid.Row="1" Content="Wedstrijd nr.:* " HorizontalAlignment="Left" Margin="5" />
+                    <TextBox Grid.Row="1" x:Name="TextBoxGameNrResult" Width="100" Height="20" Margin="130,0,5,0" />
+                    <Label Grid.Row="2" Content="Set nr.:* " HorizontalAlignment="Left" Margin="5" />
+                    <TextBox Grid.Row="2" x:Name="TextBoxSetNr" Width="100" Height="20" Margin="130,0,5,0" />
+                    <Label Grid.Row="3" Content="Score Teamlid:* " HorizontalAlignment="Left" Margin="5" />
+                    <TextBox Grid.Row="3" x:Name="TextBoxScoreTeamMember" Width="100" Height="20" Margin="130,0,5,0" />
+                    <Label Grid.Row="4" Content="Score tegenstander:* " HorizontalAlignment="Left" Margin="5" />
+                    <TextBox Grid.Row="4" x:Name="TextBoxScoreOpponent" Width="100" Height="20" Margin="130,0,5,0" />
+                    <Button x:Name="buttonAddGameResult" Click="buttonAddGameResult_Click" Grid.Row="5" Cursor="Hand" Height="28" Margin="10,0,0,5" Padding="5" Background="White" HorizontalAlignment="Left">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="../Images/add.png" />
+                            <TextBlock Margin="5,0" FontSize="11" FontWeight="Light">Resultaat toevoegen</TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="ButtonUpdateGameResult" Click="ButtonUpdateGameResult_Click" Grid.Row="5" Cursor="Hand" Height="28" Margin="0,0,10,5" Padding="5" Background="White" HorizontalAlignment="Right">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="../Images/updated.png" />
+                            <TextBlock Margin="5,0" FontSize="11" FontWeight="Light">Resultaat aanpassen</TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <TextBox x:Name="SelectedGameResult" Grid.Row="1" Width="100" HorizontalAlignment="Right" Visibility="Collapsed" />
+                </Grid>
+            </Border>
+            <DataGrid Grid.Column="1" ColumnWidth="*" MouseDoubleClick="GameResultList_MouseDoubleClick" x:Name="GameResultList" Margin="10,5,10,5" HeadersVisibility="Column" IsReadOnly="True" />
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Content="Zoek alle wedstrijden incl. resultaten van één lid" FontSize="11" FontWeight="Bold" Margin="5" />
+                <Label Content="Lid id: " Grid.Row="1" Margin="5,0,0,0" />
+                <TextBox x:Name="TextBoxSearchGameResulstsMember" Grid.Row="1" Width="30" Height="20" HorizontalAlignment="Left" Margin="45,0,0,0" />
+                <Button x:Name="ButtonSearchGameResultsMember" Grid.Row="1" Cursor="Hand" Padding="5" Margin="85,0,0,0" Width="60" Height="25" HorizontalAlignment="Left" Background="White">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="../Images/search.png" />
+                        <TextBlock Margin="5,0" FontSize="11" FontWeight="Light">Zoek</TextBlock>
+                    </StackPanel>
+                </Button>
+                <DatePicker x:Name="DatePickerFilterGameResulstsMember" Grid.Row="1" ToolTip="Wedstrijd datum" Cursor="Hand" Width="110" Height="25" SelectedDate="{x:Static sys:DateTime.Now}" HorizontalAlignment="Center" Margin="90,0,0,0" />
+                <Button x:Name="ButtonFilterGameResultsMember" Grid.Row="1" Cursor="Hand" Padding="5" Margin="0,0,10,0" Height="25" Background="White" HorizontalAlignment="Right">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="../Images/filter.png" />
+                        <TextBlock Margin="5,0" FontSize="11" FontWeight="Light">Filter</TextBlock>
+                    </StackPanel>
+                </Button>
+                <DataGrid Grid.Row="2" ColumnWidth="*" x:Name="GameResulstsOfMemberList" Margin="10,5,10,5" HeadersVisibility="Column" IsReadOnly="True" />
+            </Grid>
+        </Grid>
     </Grid>
 </Page>

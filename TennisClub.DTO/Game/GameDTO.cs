@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using TennisClub.DTO.Member;
 
 namespace TennisClub.DTO.Game
@@ -10,5 +11,6 @@ namespace TennisClub.DTO.Game
         public MemberDTO Member { get; set; }
         public LeagueDTO League { get; set; }
         public DateTime Date { get; set; }
+        public List<GameResultDTO> Results { get; set; }
     }
 }

@@ -18,6 +18,8 @@ namespace TennisClub.API
                 CreateMap<Game, GameUpdateDTO>().ReverseMap();
                 CreateMap<League, LeagueDTO>().ReverseMap();
                 CreateMap<GameResult, GameResultDTO>().ReverseMap();
+                CreateMap<GameResult, GameResultCreateDTO>().ReverseMap();
+                CreateMap<GameResult, GameResultUpdateDTO>().ReverseMap();
             }
 
             {
