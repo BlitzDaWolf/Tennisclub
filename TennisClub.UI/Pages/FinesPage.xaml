@@ -113,7 +113,7 @@
                             <TextBlock Margin="5,0" FontSize="11" FontWeight="Light">Filter</TextBlock>
                         </StackPanel>
                     </Button>
-                    <DataGrid x:Name="FinesList" Grid.Row="2" ColumnWidth="*" MouseDoubleClick="FinesList_MouseDoubleClick" HeadersVisibility="Column" IsReadOnly="True" Margin="10" />
+                    <DataGrid x:Name="FinesList" Grid.Row="2" ColumnWidth="*" MouseDoubleClick="FinesList_MouseDoubleClick" HeadersVisibility="Column" IsReadOnly="True" Margin="10" AlternationCount="2" AlternatingRowBackground="Azure" />
                     <Grid Grid.Row="3">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"></RowDefinition>
@@ -139,7 +139,7 @@
                                 <TextBlock Margin="5,0" FontSize="11" FontWeight="Light">Zoek</TextBlock>
                             </StackPanel>
                         </Button>
-                        <DataGrid x:Name="FinesOfMemberList" Grid.Row="2" ColumnWidth="*" Margin="10,5,10,5" HeadersVisibility="Column" IsReadOnly="True" />
+                        <DataGrid x:Name="FinesOfMemberList" Grid.Row="2" ColumnWidth="*" Margin="10,5,10,5" HeadersVisibility="Column" IsReadOnly="True" AlternationCount="2" AlternatingRowBackground="Azure" />
                     </Grid>
                 </Grid>
             </Grid>

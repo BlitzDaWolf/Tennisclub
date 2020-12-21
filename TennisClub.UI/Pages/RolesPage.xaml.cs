@@ -303,10 +303,25 @@ namespace TennisClub.UI.Pages
         }
         private async void ButtonSearchRolesMember_Click(object sender, RoutedEventArgs e)
         {
-            if (TextBoxSearchRolesMember.Text.Length != 0)
+            var members = await LoadMemberData();
+            var listOfMemberRoles = await LoadMemberRoleData();
+
+            if (TextBoxSearchRolesMember.Text.Length == 0)
             {
-                var listRolesOfMember = await LoadMemberRoleData();
-                RolesOfMemberList.ItemsSource = from memberRoles in listRolesOfMember
+                MessageBox.Show($"Controleer of alle verplichte velden correct zijn ingevuld!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else if (!members.Any(x => x.Id == int.Parse(TextBoxSearchRolesMember.Text)))
+            {
+                MessageBox.Show($"Lid met id: {TextBoxSearchRolesMember.Text} bestaat niet!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else if (!listOfMemberRoles.Any(x => x.Member.Id == int.Parse(TextBoxSearchRolesMember.Text)))
+            {
+                MessageBox.Show($"Lid met id: {TextBoxSearchRolesMember.Text} heeft nog geen rollen om op te zoeken!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
+            else
+            {
+                RolesOfMemberList.ItemsSource = from memberRoles in listOfMemberRoles
                                                 where memberRoles.Member.Id.ToString().Contains(TextBoxSearchRolesMember.Text)
                                                 select new { memberRoles.Id, Rol_id = memberRoles.Role.Id, Lid_id = memberRoles.Member.Id, Start_datum = memberRoles.StartDate.ToString("dd/MM/yyyy"), Eind_datum = (memberRoles.EndDate.Year == 1) ? "" : memberRoles.EndDate.ToString("dd/MM/yyyy") };
                 RolesOfMemberList.Columns[0].Header = "Id";
@@ -315,10 +330,6 @@ namespace TennisClub.UI.Pages
                 RolesOfMemberList.Columns[3].Header = "Start datum";
                 RolesOfMemberList.Columns[4].Header = "Eind datum";
                 ClearTextBoxes();
-            }
-            else
-            {
-                MessageBox.Show($"Controleer of alle verplichte velden correct zijn ingevuld!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         private void ButtonRolesPage_Click(object sender, RoutedEventArgs e)
@@ -330,6 +341,7 @@ namespace TennisClub.UI.Pages
         {
             await LoadRoleData();
             await LoadMemberRoleData();
+            RolesOfMemberList.ItemsSource = null;
             ClearTextBoxes();
         }
         #endregion

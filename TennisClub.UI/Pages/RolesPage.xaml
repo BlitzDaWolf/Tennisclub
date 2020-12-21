@@ -65,7 +65,7 @@
                         <RowDefinition Height="Auto"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Label Content="Reeds bestaande rollen" FontSize="11" FontWeight="Bold" Margin="5" />
-                    <DataGrid Grid.Row="1" ColumnWidth="*" x:Name="RolesList" Margin="10,5,10,5" HorizontalAlignment="Left" MouseDoubleClick="RollenList_MouseDoubleClick" HeadersVisibility="Column" IsReadOnly="True" />
+                    <DataGrid Grid.Row="1" ColumnWidth="*" x:Name="RolesList" Margin="10,5,10,5" HorizontalAlignment="Left" MouseDoubleClick="RollenList_MouseDoubleClick" HeadersVisibility="Column" IsReadOnly="True" AlternationCount="2" AlternatingRowBackground="Azure" />
                     <TextBox x:Name="SelectedRole" Visibility="Collapsed" />
                 </Grid>
             </Grid>
@@ -140,7 +140,7 @@
                         <RowDefinition Height="Auto"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Label Content="Rollen van leden" FontSize="11" FontWeight="Bold" Margin="5" />
-                <DataGrid Grid.Row="1" x:Name="MemberRolesList" ColumnWidth="*" Margin="10,5,10,5" MouseDoubleClick="MemberRolesList_MouseDoubleClick" HeadersVisibility="Column" IsReadOnly="True" />
+                <DataGrid Grid.Row="1" x:Name="MemberRolesList" ColumnWidth="*" Margin="10,5,10,5" MouseDoubleClick="MemberRolesList_MouseDoubleClick" HeadersVisibility="Column" IsReadOnly="True" AlternationCount="2" AlternatingRowBackground="Azure" />
             </Grid>
             <Grid Grid.Column="2">
                 <Grid.RowDefinitions>
@@ -157,7 +157,7 @@
                         <TextBlock Margin="5,0" FontSize="11" FontWeight="Light">Zoek</TextBlock>
                     </StackPanel>
                 </Button>
-                <DataGrid Grid.Row="2" x:Name="RolesOfMemberList" ColumnWidth="*" Margin="10,5,10,5" HeadersVisibility="Column" IsReadOnly="True" />
+                <DataGrid Grid.Row="2" x:Name="RolesOfMemberList" ColumnWidth="*" Margin="10,5,10,5" HeadersVisibility="Column" IsReadOnly="True" AlternationCount="2" AlternatingRowBackground="Azure" />
             </Grid>
         </Grid>
     </Grid>

@@ -39,7 +39,6 @@ namespace TennisClub.API
             services.AddSingleton(mapper);
 
             services.AddScoped<UnitOfWork>();
-            //services.AddSwaggerGen();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, TennisContext db)
