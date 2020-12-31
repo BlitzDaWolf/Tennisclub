@@ -1,2 +1,7 @@
 # Tennisclub :tennis:
-Made in .NET Core + Efcore + WPF
+
+Nodige software: 
+
+- Visual Studio
+- .NET Framework
+- Microsoft SQL Server (MSSQL)
